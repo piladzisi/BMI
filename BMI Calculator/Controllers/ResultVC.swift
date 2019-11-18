@@ -9,17 +9,25 @@
 import UIKit
 
 class ResultVC: UIViewController {
-
+    
+    var bmiValue: Float?
+    
+    @IBOutlet weak var adviceLabel: UILabel!
+    
     @IBOutlet weak var resultLabel: UILabel!
-    //let bmi = ViewController.bmi.value
+    
+    let vc = MainVC()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        let label = UILabel()
-        label.text = "Hello"
-        label.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+      
+        resultLabel.text = String(bmiValue!.rounded())
     }
-   
+    
+    @IBAction func recalculatePressed(_ sender: UIButton) {
+    }
+    
+    
 
 }

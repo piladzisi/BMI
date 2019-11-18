@@ -16,6 +16,7 @@ struct BmiCalculator {
           self.weight = weight
           self.height = height
       }
+    
     func calculateBmi() -> Float{
     let  bmi = weight / (height * height)
         return bmi

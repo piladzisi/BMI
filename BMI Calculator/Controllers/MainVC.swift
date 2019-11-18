@@ -8,16 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainVC: UIViewController {
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     
     @IBOutlet weak var weightSlider: UISlider!
     @IBOutlet weak var heightSlider: UISlider!
     
-    var height = 0
-    var weight = 0
-    var bmi = 0
+    var height = Float(0)
+    var weight = Float(0)
+    var bmi = Float(0)
 
     
     override func viewDidLoad() {
@@ -41,10 +41,17 @@ class ViewController: UIViewController {
         weight = weightSlider.value
         let bmiCalculator = BmiCalculator(weight: weight, height: height)
         bmi = bmiCalculator.calculateBmi()
+    
+        
+        self.performSegue(withIdentifier: "goToResult", sender: self)
+        
     }
     
-    func updateUI() {
-      
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinatonVC = segue.destination as! ResultVC //downcasting
+            destinatonVC.bmiValue = bmi
+        }
     }
 
 }
