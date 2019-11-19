@@ -10,10 +10,11 @@ import UIKit
 
 class ResultVC: UIViewController {
     
-    var bmiValue: Float?
+    var bmiValue: String?
+    var advice: String?
+    var color: UIColor?
     
     @IBOutlet weak var adviceLabel: UILabel!
-    
     @IBOutlet weak var resultLabel: UILabel!
     
     let vc = MainVC()
@@ -21,11 +22,13 @@ class ResultVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        resultLabel.text = String(bmiValue!.rounded())
+        resultLabel.text = bmiValue ?? "0.0"
+        adviceLabel.text = advice ?? "Error"
+        view.backgroundColor = color ?? .yellow
     }
     
     @IBAction func recalculatePressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
     

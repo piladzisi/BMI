@@ -15,44 +15,38 @@ class MainVC: UIViewController {
     @IBOutlet weak var weightSlider: UISlider!
     @IBOutlet weak var heightSlider: UISlider!
     
-    var height = Float(0)
-    var weight = Float(0)
-    var bmi = Float(0)
-
+    var bmiCalculator = BmiCalculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
     }
-
-
+    
     @IBAction func heightSliderChanged(_ sender: UISlider) {
         let height = String(format: "%.2f", sender.value)
         heightLabel.text = String("\(height)m")
-        
     }
+    
     @IBAction func weightSliderChanged(_ sender: UISlider) {
         let weight = sender.value.rounded() 
         weightLabel.text = String("\(weight)kg")
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        height = heightSlider.value
-        weight = weightSlider.value
-        let bmiCalculator = BmiCalculator(weight: weight, height: height)
-        bmi = bmiCalculator.calculateBmi()
-    
-        
+        let height = heightSlider.value
+        let weight = weightSlider.value
+       
+        bmiCalculator.calculateBmi(height: height, weight: weight)
         self.performSegue(withIdentifier: "goToResult", sender: self)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToResult" {
             let destinatonVC = segue.destination as! ResultVC //downcasting
-            destinatonVC.bmiValue = bmi
+            destinatonVC.bmiValue = bmiCalculator.getBMIValue()
+            destinatonVC.advice = bmiCalculator.getAdvice()
+            destinatonVC.color = bmiCalculator.getColor()
         }
     }
-
+    
 }
 
