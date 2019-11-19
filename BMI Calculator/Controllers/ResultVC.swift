@@ -22,9 +22,9 @@ class ResultVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultLabel.text = bmiValue ?? "0.0"
-        adviceLabel.text = advice ?? "Error"
-        view.backgroundColor = color ?? .yellow
+        resultLabel.text = bmiValue
+        adviceLabel.text = advice
+        view.backgroundColor = color
     }
     
     @IBAction func recalculatePressed(_ sender: UIButton) {
